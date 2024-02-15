@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Orders{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="container">
+        <h1>Create new orders</h1>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>
+                    <p>Creation time: </p>
+                    {{ form_widget(form.creationTime) }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Last updated: </p>
+                    {{ form_widget(form.lastUpdate) }}
+                </td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.comment) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.status) }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form_row(form.user) }}</td>
+
+            </tr>
+            <tr>
+{#                <td>{{ dump(form.reservationItems) }}#}
+            </tr>
+
+            </tbody>
+        </table>
+        <div class="item-table" id="reservation-items">
+            <div data-prototype="{{ form_row(form.reservationItems.vars.prototype)|e('html_attr') }}"></div>
+        <table class="table">
+        <tbody>
+
+        {% for reservationItem in form.reservationItems %}
+        {{ dump(form_row(form.reservationItems)) }}
+            <tr>
+            <td>{{ form_row(reservationItem.item) }}</td>
+            <td>{{ form_row(reservationItem.Amount) }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+        {{ include('reservation/_form.html.twig') }}
+        <a class="btn btn-primary" href="{{ path('app_reservation_index') }}">back to list</a>
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}

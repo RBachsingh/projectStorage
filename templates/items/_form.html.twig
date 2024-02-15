@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <table class="table">
+        <tbody>
+        <tr>
+            {{ form_start(form) }}
+            <td>{{ form_row(form.name) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(form.categories) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(form.description) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(form.amount) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(form.purchasing_value) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(form.sales_value) }}</td>
+        </tr>
+        <tr>
+        </tr>
+        <td>{{ form_row(form.alertValue) }}</td>
+        <tr>
+            <td>
+                <button class="btn btn-success"
+                {{ form_widget(form.save) }}</button></td>
+        </tr>
+        {{ form_end(form) }}
+        </tbody>
+    </table>
+</div>

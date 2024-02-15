@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reservation{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <table class="table">
+            <h1>Edit orders</h1>
+
+            {{ form_start(form) }}
+            <tbody>
+            <tr>
+                <td>{{ form_row(form.comment) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.status) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.creationTime) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.lastUpdate) }}</td>
+            </tr>
+            </tbody>
+            {{ form_end(form) }}
+        </table>
+        <br>
+        {{ include('reservation/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="container">
+            {{ include('reservation/_delete_form.html.twig') }}
+            <br>
+            <a class="btn btn-primary" href="{{ path('app_reservation_index') }}">back to list</a>
+        </div>
+    </div>
+{% endblock %}
