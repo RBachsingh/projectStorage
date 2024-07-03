@@ -26,32 +26,14 @@
             <tr>
                 <td>{{ form_row(form.status) }}</td>
             </tr>
-
             <tr>
                 <td>{{ form_row(form.user) }}</td>
-
             </tr>
             <tr>
-{#                <td>{{ dump(form.reservationItems) }}#}
+               <td>{{ form_row(form) }}</td>
             </tr>
-
             </tbody>
         </table>
-        <div class="item-table" id="reservation-items">
-            <div data-prototype="{{ form_row(form.reservationItems.vars.prototype)|e('html_attr') }}"></div>
-        <table class="table">
-        <tbody>
-
-        {% for reservationItem in form.reservationItems %}
-        {{ dump(form_row(form.reservationItems)) }}
-            <tr>
-            <td>{{ form_row(reservationItem.item) }}</td>
-            <td>{{ form_row(reservationItem.Amount) }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-        </table>
-        </div>
         {{ include('reservation/_form.html.twig') }}
         <a class="btn btn-primary" href="{{ path('app_reservation_index') }}">back to list</a>
     </div>

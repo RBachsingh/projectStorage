@@ -47,25 +47,37 @@ class ReservationController extends AbstractController
 //                $reservationItem->setAmount($item);
 //                $item->addItems($reservation);
 //            }
+            $selectedItems = $form->get('items')->getData();
+            $quantity = $form->get('amount')->getData();
+
+            $reservation = new Reservation();
 
             $reservation->setUser($this->getUser());
+
+            foreach ($selectedItems as $item){
+                $reservationItem = new ReservationItem();
+                $reservation->addItems($item);
+                $reservationItem->setAmount($quantity);
+                $reservation->addReservationItem($reservationItem);
+
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($reservation);
 
-            foreach($form->get('ReservationItems')->getData() as $reservationItem){
-                $amount = $reservationItem->getAmount();
-                $items = $reservationItem->getItems();
-
-                $reservationItemEntity = new ReservationItem();
-                $reservationItemEntity->addItem($items);
-                $reservationItemEntity->removeItem($items);
-                $reservationItemEntity->setAmount($amount);
-                $reservationItemEntity->setReservation($reservation);
-                $entityManager->persist($reservationItemEntity);
-
-            }
+//            foreach($form->get('ReservationItems')->getData() as $reservationItem){
+//                $amount = $reservationItem->getAmount();
+//                $items = $reservationItem->getItems();
+//
+//                $reservationItemEntity = new ReservationItem();
+//                $reservationItemEntity->addItem($items);
+//                $reservationItemEntity->removeItem($items);
+//                $reservationItemEntity->setAmount($amount);
+//                $reservationItemEntity->setReservation($reservation);
+//                $entityManager->persist($reservationItemEntity);
+//
+//            }
 
             $entityManager->flush();
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
